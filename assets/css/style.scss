@@ -3,6 +3,7 @@
 /*---------------------------------------- */
 
 /* == COLOR CODES  */
+/* == MIXINS  */
 /* == KEYFRAMES  */
 /* == FONT  */
 /* == GENERAL  */
@@ -24,44 +25,121 @@ $tertiary-color: #99e2d0;
 
 $primary-background-color: #fff;
 $secondary-background-color: #f6f6f6;
-
-$button-color: #fff;
-
 $location-user-background-color: #eaeaea;
-
 $card-background-color: #fff;
-$card-link-color: #000;
-
 $footer-background-color: #353535;
-$footer-color: #fff;
+
+$dark-text-color: #000;
+$light-text-color: #fff;
+
+$back-arrow-color: #2c2c2c;
+
+$howto-card-icon-color: #7e7e7e;
+
+$box-shadow-color: #ddd;
+
+/* ---------------------------------------- */
+/* ==           MIXINS               */
+/*---------------------------------------- */
+
+@mixin primary-box-shadow {
+	box-shadow: 1vw 1vw 2vw 0 $box-shadow-color;
+	@media screen and (min-width: 600px) {
+		box-shadow: 0.5vw 0.5vw 1vw 0 $box-shadow-color;
+	}
+}
+
+@mixin ellipsis {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 
 /* ---------------------------------------- */
 /* ==           KEYFRAMES               */
 /*---------------------------------------- */
 
-@-webkit-keyframes revelation {
+@-webkit-keyframes loader-container {
 	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	70% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	95% {
 		opacity: 0;
-		transform: translateY(2vw);
+		transform: scale(1);
 	}
 	100% {
-		opacity: 1;
-		transform: translateY(0);
+		opacity: 0;
+		transform: scale(0);
 	}
 }
 
-@keyframes revelation {
+@keyframes loader-container {
 	0% {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	70% {
+		opacity: 1;
+		transform: scale(1);
+	}
+	95% {
 		opacity: 0;
-		transform: translateY(2vw);
+		transform: scale(1);
 	}
 	100% {
-		opacity: 1;
-		transform: translateY(0);
+		opacity: 0;
+		transform: scale(0);
 	}
 }
 
-@-webkit-keyframes check-rotate {
+@-webkit-keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes loader {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@-webkit-keyframes menu-appear {
+	0% {
+		opacity: 0;
+		transform: translateX(16vw);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes menu-appear {
+	0% {
+		opacity: 0;
+		transform: translateX(16vw);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@-webkit-keyframes menu-check-rotate {
 	from {
 		transform: rotate(0);
 	}
@@ -70,7 +148,7 @@ $footer-color: #fff;
 	}
 }
 
-@keyframes check-rotate {
+@keyframes menu-check-rotate {
 	from {
 		transform: rotate(0);
 	}
@@ -79,7 +157,7 @@ $footer-color: #fff;
 	}
 }
 
-@-webkit-keyframes check-appear {
+@-webkit-keyframes menu-check-appear {
 	0% {
 		right: -20vw;
 	}
@@ -88,29 +166,80 @@ $footer-color: #fff;
 	}
 }
 
-@keyframes check-appear {
+@keyframes menu-check-appear {
 	0% {
 		right: -20vw;
 	}
 	100% {
 		right: 0;
+	}
+}
+@media screen and (min-width: 600px) {
+	@-webkit-keyframes menu-check-appear {
+		0% {
+			right: -10vw;
+		}
+		100% {
+			right: 0;
+		}
+	}
+	@keyframes menu-check-appear {
+		0% {
+			right: -10vw;
+		}
+		100% {
+			right: 0;
+		}
+	}
+}
+@media screen and (min-width: 1200px) {
+	@-webkit-keyframes menu-check-appear {
+		0% {
+			right: -5rem;
+		}
+		100% {
+			right: 0;
+		}
+	}
+	@keyframes menu-check-appear {
+		0% {
+			right: -5rem;
+		}
+		100% {
+			right: 0;
+		}
 	}
 }
 
 /* ---------------------------------------- */
 /* ==              FONT                 */
 /*---------------------------------------- */
-
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
+
+body {
+	font-size: 4vw;
+	@media screen and (min-width: 600px) {
+		font-size: 2vw;
+	}
+	@media screen and (min-width: 1200px) {
+		font-size: 1rem;
+	}
+	font-family: "Roboto", serif;
+}
+
+h1,
+.restaurant-menu__title,
+.footer__title {
+	font-family: "Shrikhand", serif;
+}
 
 /* ---------------------------------------- */
 /* ==            GENERAL                */
 /*---------------------------------------- */
 body {
+	box-sizing: border-box;
 	margin: 0;
-	font-size: 4vw;
-	font-family: "Roboto", serif;
 	background-color: $primary-background-color;
 }
 
@@ -129,28 +258,28 @@ h6 {
 }
 
 h1 {
-	font-size: 8vw;
+	font-size: 200%;
 	font-weight: 500;
 }
 
 h2 {
-	font-size: 7vw;
+	font-size: 175%;
 	letter-spacing: -0.2vw;
-}
-
-h1,
-.restaurant-menu__title,
-.footer__title {
-	font-family: "Shrikhand", serif;
+	@media screen and (min-width: 600px) {
+		letter-spacing: -0.1vw;
+	}
+	@media screen and (min-width: 1200px) {
+		letter-spacing: -0.05rem;
+	}
 }
 
 a {
-	color: #000;
+	color: $dark-text-color;
 	&:visited {
-		color: #000;
+		color: $dark-text-color;
 	}
 	&:hover {
-		color: #000;
+		color: $dark-text-color;
 	}
 }
 
@@ -169,21 +298,49 @@ a {
 		margin-right: 5vw;
 		margin-left: 5vw;
 		padding: 13vw 0 12vw;
+		@media screen and (min-width: 600px) {
+			margin-right: 2.5vw;
+			margin-left: 2.5vw;
+			padding: 3.25vw 0 3vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-right: 1.25rem;
+			margin-left: 1.25rem;
+			padding: 1.625rem 0 1.5rem;
+		}
 	}
 }
 
 .button {
-	color: $button-color;
+	color: $light-text-color;
 	background: linear-gradient(170deg, $secondary-color, $primary-color);
 	border: none;
+	font-size: 100%;
+
+	transition: 500ms ease;
+	@include primary-box-shadow;
 	padding: 4vw 8vw;
 	border-radius: 6vw;
-	font-size: 4vw;
-	box-shadow: 1vw 1vw 2vw 0 #ddd;
 	cursor: pointer;
+	@media screen and (min-width: 600px) {
+		padding: 2vw 4vw;
+		border-radius: 3vw;
+	}
+	@media screen and (min-width: 1200px) {
+		padding: 1rem 2rem;
+		border-radius: 1.5rem;
+	}
 	&:hover {
 		opacity: 0.8;
-		box-shadow: 2vw 2vw 2vw 0.5vw #ddd;
+		transform: scale(1.05);
+
+		box-shadow: 2vw 2vw 2vw 0.5vw $box-shadow-color;
+		@media screen and (min-width: 600px) {
+			box-shadow: 1vw 1vw 1vw 0.25vw $box-shadow-color;
+		}
+		@media screen and (min-width: 1200px) {
+			box-shadow: 0.5rem 0.5rem 0.5rem 0.125rem $box-shadow-color;
+		}
 	}
 }
 
@@ -192,16 +349,63 @@ a {
 	padding-left: 0;
 }
 
+.loader {
+	margin: auto;
+	-webkit-animation: loader 1s infinite linear;
+	animation: loader 1s infinite linear;
+	border-radius: 50%;
+	border: 4vw solid $secondary-color;
+	border-left: 4vw solid $primary-color;
+	width: 40vw;
+	height: 40vw;
+	@media screen and (min-width: 600px) {
+		border: 2vw solid $secondary-color;
+		border-left: 2vw solid $primary-color;
+		width: 20vw;
+		height: 20vw;
+	}
+	@media screen and (min-width: 1200px) {
+		border: 1rem solid $secondary-color;
+		border-left: 1rem solid $primary-color;
+		width: 10rem;
+		height: 10rem;
+	}
+	&-container {
+		background: adjust-color($color: $tertiary-color, $alpha: -0.6);
+		width: 100%;
+		height: 100%;
+		display: flex;
+		position: fixed;
+		top: 0;
+		left: 0;
+		-webkit-animation: loader-container 2s;
+		animation: loader-container 2s;
+		transform: scale(0);
+		z-index: 999;
+	}
+}
+
 /* ---------------------------------------- */
 /* ==            HEADER                */
 /*---------------------------------------- */
 .header {
 	text-align: center;
-	box-shadow: 0 0 4vw 4vw #2c2c2c;
 	position: relative;
-	box-shadow: 0 0 1vw 0.5vw #80808094;
+	box-shadow: 0 0 1vw 0.5vw darken($color: $box-shadow-color, $amount: 20%);
+	@media screen and (min-width: 600px) {
+		box-shadow: 0 0 0.5vw 0.25vw darken($color: $box-shadow-color, $amount: 20%);
+	}
+	@media screen and (min-width: 1200px) {
+		box-shadow: 0 0 0.25rem 0.125rem darken($color: $box-shadow-color, $amount: 20%);
+	}
 	&-container {
-		padding: 4vw 0 1vw 0px;
+		padding: 4vw 0 1vw 0;
+		@media screen and (min-width: 600px) {
+			padding: 2vw 0 0.5vw 0;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 1rem 0 0.25rem 0;
+		}
 	}
 }
 
@@ -220,9 +424,16 @@ nav {
 
 .back-arrow {
 	position: absolute;
+	color: $back-arrow-color;
+	transition: 500ms ease;
+	font-size: 125%;
 	bottom: 5vw;
-	color: #2c2c2c;
-	font-size: 5vw;
+	@media screen and (min-width: 600px) {
+		bottom: 2.5vw;
+	}
+	@media screen and (min-width: 1200px) {
+		bottom: 1.25rem;
+	}
 	&:hover {
 		opacity: 0.8;
 	}
@@ -238,22 +449,56 @@ nav {
 	&-user {
 		background-color: $location-user-background-color;
 		padding: 4vw 0;
+		@media screen and (min-width: 600px) {
+			padding: 2vw 0;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 1rem 0;
+		}
 		&__city {
-			margin-left: 3vw;
 			font-weight: bold;
+			margin-left: 3vw;
+			@media screen and (min-width: 600px) {
+				margin-left: 1.5vw;
+			}
+			@media screen and (min-width: 1200px) {
+				margin-left: 0.75rem;
+			}
 		}
 		.fa-map-marker-alt {
 			margin-left: -8vw;
+			@media screen and (min-width: 600px) {
+				margin-left: -4vw;
+			}
+			@media screen and (min-width: 1200px) {
+				margin-left: -2rem;
+			}
 		}
 	}
 	&-container {
 		padding-top: 11vw;
 		padding-bottom: 15vw;
+		@media screen and (min-width: 600px) {
+			padding-top: 2.75vw;
+			padding-bottom: 3.75vw;
+		}
+		@media screen and (min-width: 1200px) {
+			padding-top: 1.375rem;
+			padding-bottom: 1.875rem;
+		}
 		.subtitle {
-			font-size: 5vw;
-			margin-bottom: 7vw;
+			font-size: 125%;
 			font-weight: 300;
+			margin-bottom: 7vw;
 			margin-top: 2vw;
+			@media screen and (min-width: 600px) {
+				margin-bottom: 3.5vw;
+				margin-top: 1vw;
+			}
+			@media screen and (min-width: 1200px) {
+				margin-bottom: 1.75rem;
+				margin-top: 0.5rem;
+			}
 		}
 	}
 }
@@ -265,43 +510,92 @@ nav {
 .howto {
 	.title {
 		margin-bottom: 5vw;
+		@media screen and (min-width: 600px) {
+			margin-bottom: 2.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-bottom: 1.25rem;
+		}
 	}
 }
 .howto-card {
+	&-container {
+		@media screen and (min-width: 600px) {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+	}
 	display: flex;
 	align-items: center;
 	background-color: $secondary-background-color;
+	transition: 500ms ease;
+	@include primary-box-shadow;
 	border-radius: 4vw;
 	margin-bottom: 6.5vw;
 	margin-left: 2vw;
-	box-shadow: 1vw 1vw 2vw 0 #ddd;
+	@media screen and (min-width: 600px) {
+		border-radius: 2vw;
+		margin-bottom: 3.25vw;
+		margin-left: 1vw;
+		width: 30%;
+	}
+	@media screen and (min-width: 1200px) {
+		border-radius: 1rem;
+		margin-bottom: 1.625rem;
+		margin-left: 0.5rem;
+		width: 32%;
+	}
 	&:hover {
-		background-color: rgba(147, 86, 220, 0.2);
+		background-color: adjust-color($color: $primary-color, $alpha: -0.8);
 		.howto-card {
 			&__icon {
 				color: $primary-color;
+				transition: 500ms ease;
 			}
 		}
 	}
 	&__number {
 		background-color: $primary-color;
 		border-radius: 100%;
-		padding: 1.5vw 2.5vw;
-		color: #fff;
-		font-size: 3.5vw;
+		color: $light-text-color;
+		font-size: 85%;
 		position: relative;
+		padding: 1.5vw 2.5vw;
 		right: 3vw;
+		@media screen and (min-width: 600px) {
+			padding: 0.75vw 1.25vw;
+			right: 1.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 0.375rem 0.625rem;
+			right: 0.75rem;
+		}
 	}
 	&__icon {
-		color: #7e7e7e;
-		padding: 0 7vw 0 1.5vw;
-		font-size: 5vw;
-		width: 5vw;
+		color: $howto-card-icon-color;
+		font-size: 125%;
 		text-align: center;
+		padding: 0 7vw 0 1.5vw;
+		width: 5vw;
+		@media screen and (min-width: 600px) {
+			padding: 0 3.5vw 0 0.75vw;
+			width: 2.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 0 1.75rem 0 0.375rem;
+			width: 1.25rem;
+		}
 	}
 	&__text {
 		font-weight: bold;
 		padding: 7.5vw 0;
+		@media screen and (min-width: 600px) {
+			padding: 1.875vw 0;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 1.875rem 0;
+		}
 	}
 }
 
@@ -312,32 +606,71 @@ nav {
 	background-color: $secondary-background-color;
 	.title {
 		margin-bottom: 6vw;
+		@media screen and (min-width: 600px) {
+			margin-bottom: 3vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-bottom: 1.5rem;
+		}
 	}
 }
 
 .card {
+	&-container {
+		@media screen and (min-width: 600px) {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+		}
+	}
 	background-color: $card-background-color;
-	margin-bottom: 5vw;
-	border-radius: 4vw;
-	box-shadow: 1vw 1vw 2vw 0 #ddd;
+	transition: 500ms ease;
+	@include primary-box-shadow;
 	cursor: pointer;
+	border-radius: 4vw;
+	margin-bottom: 5vw;
+	@media screen and (min-width: 600px) {
+		border-radius: 2vw;
+		margin-bottom: 2.5vw;
+		width: 49%;
+	}
+	@media screen and (min-width: 1200px) {
+		border-radius: 1rem;
+		margin-bottom: 1.25rem;
+		width: 24%;
+	}
 	h2 {
-		font-size: 6vw;
+		font-size: 150%;
 	}
 	a {
-		color: $card-link-color;
+		color: $dark-text-color;
 		text-decoration: none;
+	}
+	&:hover {
+		transform: scale(1.05);
 	}
 	&__new {
 		display: flex;
 		position: absolute;
-		right: 9vw;
-		background-color: #99e2d0;
+		background-color: $tertiary-color;
+		color: darken($color: $tertiary-color, $amount: 40%);
+		font-weight: bold;
+		margin-left: 65vw;
 		padding: 1.5vw 2.5vw;
 		border-radius: 0.5vw;
 		margin-top: 3.5vw;
-		color: #008766;
-		font-weight: bold;
+		@media screen and (min-width: 600px) {
+			margin-left: 32.5vw;
+			padding: 0.75vw 1.25vw;
+			border-radius: 0.25vw;
+			margin-top: 1.75vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-left: 14.5rem;
+			padding: 0.375rem 0.75rem;
+			border-radius: 0.125rem;
+			margin-top: 0.875rem;
+		}
 	}
 	&__img-container {
 		img {
@@ -345,20 +678,48 @@ nav {
 			object-fit: cover;
 			border-radius: 4vw 4vw 0 0;
 			height: 47vw;
+			@media screen and (min-width: 600px) {
+				border-radius: 2vw 2vw 0 0;
+				height: 23.5vw;
+			}
+			@media screen and (min-width: 1200px) {
+				border-radius: 1rem 1rem 0 0;
+				height: 11.75rem;
+			}
 		}
 	}
 	&__text-container {
 		display: flex;
 		justify-content: space-between;
 		margin: 3vw;
+		@media screen and (min-width: 600px) {
+			margin: 1.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin: 0.75rem;
+		}
 	}
 	&__title {
 		margin-bottom: -2.5vw;
+		@media screen and (min-width: 600px) {
+			margin-bottom: -1.25vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-bottom: -0.75rem;
+		}
 	}
 	&__favorite {
-		font-size: 7vw;
+		font-size: 175%;
 		margin-top: 0.5vw;
 		margin-right: 3vw;
+		@media screen and (min-width: 600px) {
+			margin-top: 0.25vw;
+			margin-right: 1.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-top: 0.125rem;
+			margin-right: 0.75rem;
+		}
 	}
 }
 
@@ -366,7 +727,13 @@ nav {
 	position: relative;
 	z-index: 1;
 	cursor: pointer;
-	-webkit-text-stroke: 0.2vw white;
+	-webkit-text-stroke: 0.2vw $light-text-color;
+	@media screen and (min-width: 600px) {
+		-webkit-text-stroke: 0.1vw $light-text-color;
+	}
+	@media screen and (min-width: 1200px) {
+		-webkit-text-stroke: 0.05rem $light-text-color;
+	}
 	&-color {
 		position: absolute;
 		left: 0;
@@ -385,7 +752,7 @@ nav {
 		background-clip: text;
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
-		-webkit-text-stroke: 0 white;
+		-webkit-text-stroke: 0 $light-text-color;
 	}
 }
 
@@ -395,80 +762,163 @@ nav {
 
 .restaurant-picture {
 	img {
-		height: 74vw;
 		-o-object-fit: cover;
 		object-fit: cover;
+		height: 74vw;
+		@media screen and (min-width: 600px) {
+			height: 37vw;
+		}
+		@media screen and (min-width: 1200px) {
+			height: 18.5rem;
+		}
 	}
 }
 
 .starter {
-	-webkit-animation: revelation 1000ms both ease-in-out;
-	animation: revelation 1000ms both ease-in-out;
+	-webkit-animation: menu-appear 1000ms both ease-in-out;
+	animation: menu-appear 1000ms both ease-in-out;
 }
 .main-course {
-	-webkit-animation: revelation 2000ms 1000ms both ease-in-out;
-	animation: revelation 2000ms 1000ms both ease-in-out;
+	-webkit-animation: menu-appear 1000ms 1500ms both ease-in-out;
+	animation: menu-appear 1000ms 1500ms both ease-in-out;
 }
 .dessert {
-	-webkit-animation: revelation 3000ms 2000ms both ease-in-out;
-	animation: revelation 3000ms 2000ms both ease-in-out;
+	-webkit-animation: menu-appear 1000ms 3000ms both ease-in-out;
+	animation: menu-appear 1000ms 3000ms both ease-in-out;
+}
+
+.starter,
+.main-course,
+.dessert {
+	@media screen and (min-width: 600px) {
+		width: 48%;
+	}
+	@media screen and (min-width: 1200px) {
+		width: 32%;
+	}
 }
 
 .restaurant-menu {
 	background-color: $secondary-background-color;
 	&-container {
-		padding-left: 5vw;
-		padding-right: 3vw;
-		padding-top: 8vw;
-		border-radius: 8vw 8vw 0 0;
 		background-color: $secondary-background-color;
 		position: relative;
-		top: -16vw;
+		margin-top: -16vw;
+		padding: 8vw 3vw 16vw 5vw;
+		border-radius: 8vw 8vw 0 0;
+		@media screen and (min-width: 600px) {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-top: -8vw;
+			padding: 4vw 1.5vw 8vw 2.5vw;
+			border-radius: 4vw 4vw 0 0;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-top: -4rem;
+			padding: 2rem 0.75rem 4rem 1.25rem;
+			border-radius: 2rem 2rem 0 0;
+			box-shadow: 0.8rem 0 0.8rem -1rem $box-shadow-color, -0.8rem 0 0.8rem -1rem $box-shadow-color;
+		}
 	}
 	&__title {
+		&-container {
+			@media screen and (min-width: 600px) {
+				width: 100%;
+			}
+		}
 		display: flex;
 		justify-content: space-between;
 		margin-right: 6vw;
 		margin-bottom: 8vw;
 		letter-spacing: 0.2vw;
+		@media screen and (min-width: 600px) {
+			margin-right: 3vw;
+			margin-bottom: 4vw;
+			letter-spacing: 0.1vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-right: 1.5rem;
+			margin-bottom: 2rem;
+			letter-spacing: 0.05rem;
+		}
 	}
 	&__subtitle {
 		font-weight: 300;
+		text-transform: uppercase;
+		border-bottom: 3px solid $tertiary-color;
 		width: 12vw;
 		margin: 4vw 0;
 		padding-bottom: 2vw;
-		border-bottom: 3px solid $tertiary-color;
-		text-transform: uppercase;
+		@media screen and (min-width: 600px) {
+			width: 6vw;
+			margin: 2vw 0;
+			padding-bottom: 1vw;
+		}
+		@media screen and (min-width: 1200px) {
+			width: 3rem;
+			margin: 1rem 0;
+			padding-bottom: 0.5rem;
+		}
 	}
 }
 
 .card-menu {
 	display: flex;
 	justify-content: space-between;
+	overflow: hidden;
 	height: 18vw;
 	margin-bottom: 4vw;
-	overflow: hidden;
+	@media screen and (min-width: 600px) {
+		width: 100%;
+		height: 8vw;
+		margin-bottom: 2vw;
+	}
+	@media screen and (min-width: 1200px) {
+		height: 4rem;
+		margin-bottom: 1rem;
+	}
 	&-container {
 		margin-bottom: 9vw;
+		@media screen and (min-width: 600px) {
+			margin-bottom: 4.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-bottom: 2.25rem;
+		}
 	}
 	&__dish-title-container {
-		padding: 2vw;
 		overflow: hidden;
 		width: 100%;
+		padding: 2vw;
+		@media screen and (min-width: 600px) {
+			padding: 1vw;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 0.5rem;
+		}
 	}
 	&__title {
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
-		font-size: 5vw;
+		@include ellipsis;
+		font-size: 125%;
 		letter-spacing: -0.1vw;
+		@media screen and (min-width: 600px) {
+			letter-spacing: -0.05vw;
+		}
+		@media screen and (min-width: 1200px) {
+			letter-spacing: -0.025rem;
+		}
 	}
 	&__subtitle {
-		font-size: 3.5vw;
+		font-size: 85%;
+		@include ellipsis;
 		margin-top: 4vw;
-		overflow: hidden;
-		white-space: nowrap;
-		text-overflow: ellipsis;
+		@media screen and (min-width: 600px) {
+			margin-top: 2vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-top: 1rem;
+		}
 	}
 	&__dish-price {
 		&-container {
@@ -478,53 +928,81 @@ nav {
 		position: relative;
 		display: flex;
 		align-items: flex-end;
-		margin-bottom: 4vw;
 		margin-left: auto;
-		margin-right: 4vw;
-		font-size: 4vw;
+		font-size: 100%;
 		font-weight: bold;
 		z-index: 1;
+		margin-bottom: 4vw;
+		margin-right: 4vw;
+		@media screen and (min-width: 600px) {
+			margin-bottom: 2vw;
+			margin-right: 2vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-bottom: 1rem;
+			margin-right: 1rem;
+		}
+	}
+	&__check {
+		display: none;
+		background-color: $tertiary-color;
+		position: relative;
+		-webkit-animation: menu-check-appear 1s;
+		animation: menu-check-appear 1s;
+		align-self: center;
+		right: 0;
+		height: inherit;
+		border-radius: 0 4vw 4vw 0;
+		padding: 0 5vw;
+		@media screen and (min-width: 600px) {
+			border-radius: 0 2vw 2vw 0;
+			padding: 0 2.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			border-radius: 0 1rem 1rem 0;
+			padding: 0 1.25rem;
+		}
 	}
 	&:hover {
-		.check-appear {
+		.card-menu__check {
 			display: flex;
 		}
 		.card-menu__dish-price {
-			-webkit-animation: check-appear 1s;
-			animation: check-appear 1s;
+			-webkit-animation: menu-check-appear 1s;
+			animation: menu-check-appear 1s;
 		}
-	}
-}
-
-.check-appear {
-	display: none;
-	background-color: #99e2d0;
-	position: relative;
-	-webkit-animation: check-appear 1s;
-	animation: check-appear 1s;
-	align-self: center;
-	right: 0;
-	border-radius: 0 4vw 4vw 0;
-	padding: 0 5vw;
-	height: inherit;
-}
-
-.order-button {
-	padding: 4vw 14vw;
-	&-container {
-		text-align: center;
 	}
 }
 
 .fa-check {
-	-webkit-animation: check-rotate 1s ease-in-out;
-	        animation: check-rotate 1s ease-in-out;
-	background-color: white;
+	-webkit-animation: menu-check-rotate 1s ease-in-out;
+	animation: menu-check-rotate 1s ease-in-out;
+	background-color: $card-background-color;
 	border-radius: 50%;
-	color: #99e2d0;
-	padding: 1vw;
+	color: $tertiary-color;
 	display: flex;
 	align-self: center;
+	padding: 1vw;
+	@media screen and (min-width: 600px) {
+		padding: 0.5vw;
+	}
+	@media screen and (min-width: 1200px) {
+		padding: 0.25rem;
+	}
+}
+
+.order-button {
+	padding: 4vw 14vw;
+	@media screen and (min-width: 600px) {
+		padding: 2vw 7vw;
+	}
+	@media screen and (min-width: 1200px) {
+		padding: 1rem 3.5rem;
+	}
+	&-container {
+		text-align: center;
+		width: 100%;
+	}
 }
 
 /* ---------------------------------------- */
@@ -532,9 +1010,9 @@ nav {
 /*---------------------------------------- */
 .footer {
 	background-color: $footer-background-color;
-	color: $footer-color;
+	color: $light-text-color;
 	a {
-		color: $footer-color;
+		color: $light-text-color;
 		text-decoration: none;
 		&:hover {
 			text-decoration: underline;
@@ -542,18 +1020,46 @@ nav {
 	}
 	&-container {
 		padding: 5vw 0;
+		@media screen and (min-width: 600px) {
+			text-align: center;
+			padding: 2.5vw 0;
+		}
+		@media screen and (min-width: 1200px) {
+			padding: 1.25rem 0;
+		}
 	}
 	&__title {
 		font-weight: normal;
 	}
 	ul {
 		margin-top: 5vw;
+		@media screen and (min-width: 600px) {
+			display: flex;
+			justify-content: space-between;
+			margin-top: 2.5vw;
+		}
+		@media screen and (min-width: 1200px) {
+			margin-top: 1.25rem;
+		}
 		li {
 			margin-bottom: 2.5vw;
+			@media screen and (min-width: 600px) {
+				width: 25%;
+				margin-bottom: 1.25vw;
+			}
+			@media screen and (min-width: 1200px) {
+				margin-bottom: 0.625rem;
+			}
 		}
 	}
 	.fas {
-		width: 6vw;
 		text-align: center;
+		width: 6vw;
+		@media screen and (min-width: 600px) {
+			width: 3vw;
+		}
+		@media screen and (min-width: 1200px) {
+			width: 1.5rem;
+		}
 	}
 }
