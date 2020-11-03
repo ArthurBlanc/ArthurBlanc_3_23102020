@@ -2,8 +2,8 @@
 /* ==            SUMMARY              */
 /*---------------------------------------- */
 
-/* == COLOR CODES  */
-/* == MIXINS  */
+/* == VARIABLES  */
+/* == GENERAL MIXINS  */
 /* == KEYFRAMES  */
 /* == FONT  */
 /* == GENERAL  */
@@ -15,7 +15,7 @@
 /* == FOOTER  */
 
 /* ---------------------------------------- */
-/* ==       COLOR VARIABLES           */
+/* ==       VARIABLES           */
 /*---------------------------------------- */
 
 $primary-color: #9356dc;
@@ -37,12 +37,43 @@ $howto-card-icon-color: #7e7e7e;
 
 $box-shadow-color: #ddd;
 
-/* ---------------------------------------- */
-/* ==           MIXINS               */
-/*---------------------------------------- */
+$font-size: (
+	mobile: 4vw,
+	tablet: 2vw,
+	desktop: 1rem,
+);
 
-@mixin primary-box-shadow {
-	box-shadow: 0.25rem 0.25rem 0.5rem 0 $box-shadow-color;
+$breakpoints: (
+	tablet: 600px,
+	desktop: 1200px,
+);
+
+/* ---------------------------------------- */
+/* ==        GENERAL MIXINS            */
+/*---------------------------------------- */
+@mixin tablet-breakpoint {
+	@media screen and (min-width: map-get($breakpoints, tablet)) {
+		@content;
+	}
+}
+@mixin desktop-breakpoint {
+	@media screen and (min-width: map-get($breakpoints, desktop)) {
+		@content;
+	}
+}
+
+@mixin main-margin-padding {
+	margin-right: 1.25rem;
+	margin-left: 1.25rem;
+	padding: 1.625rem 0 1.5rem;
+}
+
+@mixin no-margin {
+	margin: 0;
+}
+
+@mixin primary-box-shadow($color: $box-shadow-color) {
+	box-shadow: 0.25rem 0.25rem 0.5rem 0 $color;
 }
 
 @mixin ellipsis {
@@ -51,125 +82,63 @@ $box-shadow-color: #ddd;
 	text-overflow: ellipsis;
 }
 
+@mixin position-relative-0 {
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+@mixin flex-wrap-space-between {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
 /* ---------------------------------------- */
 /* ==           KEYFRAMES               */
 /*---------------------------------------- */
 
-@-webkit-keyframes loader-container {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
-	70% {
-		opacity: 1;
-		transform: scale(1);
-	}
-	95% {
-		opacity: 0;
-		transform: scale(1);
-	}
-	100% {
-		opacity: 0;
-		transform: scale(0);
-	}
-}
-
+/* Animation du fond du loader => */
 @keyframes loader-container {
-	0% {
-		opacity: 1;
-		transform: scale(1);
-	}
-
+	0%,
 	70% {
 		opacity: 1;
 		transform: scale(1);
 	}
-	95% {
+	99% {
 		opacity: 0;
 		transform: scale(1);
 	}
 	100% {
 		opacity: 0;
-		transform: scale(0);
+		transform: scale(0); /* Pour que le loadeur disparaisse à la fin de l'animation */
 	}
 }
+/* <= Animation du fond du loader */
 
-@-webkit-keyframes loader {
-	0% {
+/* Animation de rotation du loader => */
+@keyframes loader-rotate {
+	from {
 		transform: rotate(0deg);
 	}
-	100% {
+	to {
 		transform: rotate(360deg);
 	}
 }
+/* <= Animation de rotation du loader */
 
-@keyframes loader {
-	0% {
-		transform: rotate(0deg);
-	}
-	100% {
-		transform: rotate(360deg);
-	}
-}
-
-@-webkit-keyframes menu-appear {
-	0% {
-		opacity: 0;
-		transform: translateX(4rem);
-	}
-	100% {
-		opacity: 1;
-		transform: translateX(0);
-	}
-}
-
+/* Animation d'apparition des parties des menus => */
 @keyframes menu-appear {
-	0% {
+	from {
 		opacity: 0;
-		transform: translateX(4rem);
+		transform: translateX(5rem);
 	}
-	100% {
+	to {
 		opacity: 1;
 		transform: translateX(0);
 	}
 }
-
-@-webkit-keyframes menu-check-rotate {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-@keyframes menu-check-rotate {
-	from {
-		transform: rotate(0);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
-
-@-webkit-keyframes menu-check-appear {
-	0% {
-		right: -5rem;
-	}
-	100% {
-		right: 0;
-	}
-}
-
-@keyframes menu-check-appear {
-	0% {
-		right: -5rem;
-	}
-	100% {
-		right: 0;
-	}
-}
+/* <= Animation d'apparition des parties des menus */
 
 /* ---------------------------------------- */
 /* ==              FONT                 */
@@ -177,29 +146,41 @@ $box-shadow-color: #ddd;
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
 
-html {
+@mixin main-typography {
 	font-family: "Roboto", serif;
-	font-size: 4vw;
-	@media screen and (min-width: 600px) {
-		font-size: 2vw;
+	font-size: map-get($font-size, mobile);
+	@include tablet-breakpoint {
+		font-size: map-get($font-size, tablet);
 	}
-	@media screen and (min-width: 1200px) {
-		font-size: 1rem;
+	@include desktop-breakpoint {
+		font-size: map-get($font-size, desktop);
 	}
 }
 
-h1,
-.restaurant-menu__title,
-.footer__title {
+@mixin title-typography {
 	font-family: "Shrikhand", serif;
+}
+
+html {
+	@include main-typography;
+}
+
+h1 {
+	@include title-typography;
+}
+.restaurant-menu__title {
+	@include title-typography;
+}
+.footer__title {
+	@include title-typography;
 }
 
 /* ---------------------------------------- */
 /* ==            GENERAL                */
 /*---------------------------------------- */
 body {
-	box-sizing: border-box;
-	margin: 0;
+	box-sizing: border-box; /* Indique au navigateur de prendre en compte la bordure et le remplissage dans la valeur définie pour la largeur et la hauteur */
+	@include no-margin;
 	background-color: $primary-background-color;
 }
 
@@ -208,13 +189,28 @@ img {
 	height: auto;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+h1 {
+	@include no-margin;
+}
+
+h2 {
+	@include no-margin;
+}
+
+h3 {
+	@include no-margin;
+}
+
+h4 {
+	@include no-margin;
+}
+
+h5 {
+	@include no-margin;
+}
+
 h6 {
-	margin: 0;
+	@include no-margin;
 }
 
 h1 {
@@ -229,9 +225,7 @@ h2 {
 
 a {
 	color: $dark-text-color;
-	&:visited {
-		color: $dark-text-color;
-	}
+	&:visited,
 	&:hover {
 		color: $dark-text-color;
 	}
@@ -242,16 +236,24 @@ a {
 	margin: 0 auto;
 }
 
-.header,
-.location,
-.howto,
-.restaurants,
-.footer {
-	&-container {
-		margin-right: 1.25rem;
-		margin-left: 1.25rem;
-		padding: 1.625rem 0 1.5rem;
-	}
+.header-container {
+	@include main-margin-padding;
+}
+
+.location-container {
+	@include main-margin-padding;
+}
+
+.howto-container {
+	@include main-margin-padding;
+}
+
+.restaurants-container {
+	@include main-margin-padding;
+}
+
+.footer-container {
+	@include main-margin-padding;
 }
 
 .button {
@@ -259,7 +261,7 @@ a {
 	background: linear-gradient(170deg, $secondary-color, $primary-color);
 	border: none;
 	font-size: 100%;
-	transition: opacity 500ms ease, transform 500ms ease, box-shadow 500ms ease;
+	transition: opacity 500ms, transform 500ms, box-shadow 500ms;
 	@include primary-box-shadow;
 	padding: 1rem 2rem;
 	border-radius: 1.5rem;
@@ -277,25 +279,23 @@ a {
 }
 
 .loader {
-	margin: auto;
-	-webkit-animation: loader 1s infinite linear;
-	animation: loader 1s infinite linear;
+	animation: loader-rotate 1s infinite linear; /* L'animation s'effectue à vitesse constante*/
 	border-radius: 50%;
 	border: 1rem solid $secondary-color;
 	border-left: 1rem solid $primary-color;
 	width: 10rem;
 	height: 10rem;
 	&-container {
-		background: adjust-color($color: $tertiary-color, $alpha: -0.6);
-		width: 100%;
-		height: 100%;
 		display: flex;
-		position: fixed;
+		justify-content: center;
+		align-items: center;
+		position: fixed; /* Pour que le loadeur soit toujours à la meme position sur l'écran */
 		top: 0;
 		left: 0;
-		-webkit-animation: loader-container 2s;
-		animation: loader-container 2s;
-		transform: scale(0);
+		width: 100%;
+		height: 100%;
+		background: adjust-color($tertiary-color, $alpha: -0.6);
+		animation: loader-container forwards 2s; /* La cible retiendra les valeurs calculées définies lors de la dernière étape */
 		z-index: 999;
 	}
 }
@@ -304,8 +304,9 @@ a {
 /* ==            HEADER                */
 /*---------------------------------------- */
 .header {
-	position: relative;
-	box-shadow: 0 0 0.25rem 0.125rem darken($color: $box-shadow-color, $amount: 20%);
+	@include position-relative-0;
+	box-shadow: 0 0 0.25rem 0.125rem darken($box-shadow-color, 20%);
+	background: $primary-background-color;
 	&-container {
 		padding: 1rem 0 0.25rem 0;
 	}
@@ -313,7 +314,7 @@ a {
 
 nav {
 	ul {
-		margin: 0;
+		@include no-margin;
 		display: flex;
 	}
 }
@@ -327,7 +328,7 @@ nav {
 .back-arrow {
 	position: absolute;
 	color: $back-arrow-color;
-	transition: opacity 500ms ease;
+	transition: opacity 500ms;
 	font-size: 125%;
 	bottom: 1.25rem;
 	&:hover {
@@ -357,7 +358,7 @@ nav {
 	&-container {
 		padding-top: 2.75rem;
 		padding-bottom: 3.75rem;
-		@media screen and (min-width: 600px) {
+		@include tablet-breakpoint {
 			padding-top: 1.375rem;
 			padding-bottom: 1.875rem;
 		}
@@ -381,59 +382,54 @@ nav {
 }
 .howto-card {
 	&-container {
-		@media screen and (min-width: 600px) {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
+		@include tablet-breakpoint {
+			@include flex-wrap-space-between;
 		}
 	}
 	display: flex;
 	align-items: center;
 	background-color: $secondary-background-color;
-	transition: background-color 500ms ease, color 500ms ease;
+	transition: background-color 500ms, color 500ms;
+	@include position-relative-0;
 	@include primary-box-shadow;
 	border-radius: 1rem;
 	margin-bottom: 1.625rem;
 	margin-left: 0.5rem;
-	@media screen and (min-width: 600px) {
+	padding: 1.875rem 0;
+	@include tablet-breakpoint {
 		width: 30%;
+		padding: 0.9375rem 0;
 	}
-	@media screen and (min-width: 1200px) {
+	@include desktop-breakpoint {
 		width: 32%;
+		padding: 1.875rem 0;
 	}
 	&:hover {
-		background-color: adjust-color($color: $primary-color, $alpha: -0.8);
+		background-color: adjust-color($primary-color, $alpha: -0.8);
 		.howto-card {
 			&__icon {
-				color: $primary-color;
+				color: $primary-color; /* Change la couleur de l'icone au survol de la carte */
 			}
 		}
 	}
 	&__number {
 		background-color: $primary-color;
-		border-radius: 100%;
+		border-radius: 50%;
 		color: $light-text-color;
 		font-size: 85%;
-		position: relative;
+		position: absolute;
 		padding: 0.375rem 0.625rem;
-		right: 0.75rem;
+		left: -1rem;
 	}
 	&__icon {
 		color: $howto-card-icon-color;
 		font-size: 125%;
 		text-align: center;
-		padding: 0 1.75rem 0 0.375rem;
+		padding: 0 2rem;
 		width: 1.25rem;
 	}
 	&__text {
 		font-weight: bold;
-		padding: 1.875rem 0;
-		@media screen and (min-width: 600px) {
-			padding: 0.9375rem 0;
-		}
-		@media screen and (min-width: 1200px) {
-			padding: 1.875rem 0;
-		}
 	}
 }
 
@@ -449,22 +445,21 @@ nav {
 
 .card {
 	&-container {
-		@media screen and (min-width: 600px) {
-			display: flex;
-			flex-wrap: wrap;
-			justify-content: space-between;
+		@include tablet-breakpoint {
+			@include flex-wrap-space-between;
 		}
 	}
 	background-color: $card-background-color;
-	transition: transform 500ms ease;
+	transition: transform 500ms;
+	@include position-relative-0;
 	@include primary-box-shadow;
 	cursor: pointer;
 	border-radius: 1rem;
 	margin-bottom: 1.25rem;
-	@media screen and (min-width: 600px) {
+	@include tablet-breakpoint {
 		width: 49%;
 	}
-	@media screen and (min-width: 1200px) {
+	@include desktop-breakpoint {
 		width: 24%;
 	}
 	h2 {
@@ -479,17 +474,16 @@ nav {
 	}
 	&__new {
 		position: absolute;
+		top: 1rem;
+		right: 1rem;
 		background-color: $tertiary-color;
-		color: darken($color: $tertiary-color, $amount: 40%);
+		color: darken($tertiary-color, 40%);
 		font-weight: bold;
-		margin-left: 14.5rem;
 		padding: 0.375rem 0.75rem;
 		border-radius: 0.125rem;
-		margin-top: 0.875rem;
 	}
 	&__img-container {
 		img {
-			-o-object-fit: cover;
 			object-fit: cover;
 			border-radius: 1rem 1rem 0 0;
 			height: 11.75rem;
@@ -498,10 +492,13 @@ nav {
 	&__text-container {
 		display: flex;
 		justify-content: space-between;
-		margin: 0.75rem;
+		padding: 0.75rem;
 	}
 	&__title {
 		margin-bottom: -0.75rem;
+	}
+	&__district {
+		margin-bottom: 0;
 	}
 	&__favorite {
 		font-size: 175%;
@@ -511,28 +508,26 @@ nav {
 }
 
 .heart {
-	position: relative;
+	@include position-relative-0;
 	cursor: pointer;
-	-webkit-text-stroke: 0.05rem $light-text-color;
+	-webkit-text-stroke: 0.05rem $light-text-color; /* Réduit l'épaiseur des contours du coeur avant */
+	&:hover {
+		background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur des contours au survol */
+		background-clip: text; /* Limite le background à l'intérieur du coeur avant*/
+		-webkit-text-fill-color: transparent; /* Pour que la couleur de fond du coeur avant soit transparante pour que le coeur arriere puisse apparaitre */
+		-webkit-text-stroke: 0; /* Supprime le text-stroke au survol */
+	}
 	&-color {
-		position: absolute;
-		left: 0;
+		position: absolute; /* Pour que le coeur arriere ait la meme position que le coeur avant*/
 		top: 0;
-		background: linear-gradient(30deg, $secondary-color, $primary-color);
-		background-clip: text;
-		-webkit-background-clip: text;
-		transform: scale(0);
-		transition: transform 0.3s ease;
+		right: 0;
+		background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur du fond du coeur arriere */
+		background-clip: text; /* Limite le background à l'intérieur du coeur arriere */
+		transform: scale(0); /* Permet l'effet de remplissage du coeur */
+		transition: transform 0.3s;
 	}
 	&:hover .heart-color {
-		transform: scale(1);
-	}
-	&:hover {
-		background: linear-gradient(30deg, $secondary-color, $primary-color);
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		-webkit-text-stroke: 0 $light-text-color;
+		transform: scale(1); /* Permet l'effet de remplissage du coeur */
 	}
 }
 
@@ -542,54 +537,55 @@ nav {
 
 .restaurant-picture {
 	img {
-		-o-object-fit: cover;
 		object-fit: cover;
 		height: 18.5rem;
 	}
 }
 
-.starter {
-	-webkit-animation: menu-appear 1000ms both ease-in-out;
-	animation: menu-appear 1000ms both ease-in-out;
-}
-.main-course {
-	-webkit-animation: menu-appear 1000ms 1500ms both ease-in-out;
-	animation: menu-appear 1000ms 1500ms both ease-in-out;
-}
-.dessert {
-	-webkit-animation: menu-appear 1000ms 3000ms both ease-in-out;
-	animation: menu-appear 1000ms 3000ms both ease-in-out;
+@mixin menu-appear($delay: 0ms) {
+	animation: menu-appear 1000ms $delay both ease-in-out; /* L'animation respectera les règles qui s'appliquent à forwards et backwards, entraînant ainsi l'extension des propriétés de l'animation dans les deux directions. */
 }
 
-.starter,
-.main-course,
-.dessert {
-	@media screen and (min-width: 600px) {
+@mixin menu-width {
+	@include tablet-breakpoint {
 		width: 48%;
 	}
-	@media screen and (min-width: 1200px) {
+	@include desktop-breakpoint {
 		width: 32%;
 	}
+}
+
+.starter {
+	@include menu-appear;
+	@include menu-width;
+}
+
+.main-course {
+	@include menu-appear(1500ms);
+	@include menu-width;
+}
+
+.dessert {
+	@include menu-appear(3000ms);
+	@include menu-width;
 }
 
 .restaurant-menu {
 	background-color: $secondary-background-color;
 	&-container {
 		background-color: $secondary-background-color;
-		position: relative;
-		margin-top: -4rem;
+		@include position-relative-0;
+		margin-top: -4rem; /* Monte le menu sur l'image */
 		padding: 2rem 0.75rem 4rem 1.25rem;
 		border-radius: 2rem 2rem 0 0;
 		box-shadow: 0.8rem 0 0.8rem -1rem $box-shadow-color, -0.8rem 0 0.8rem -1rem $box-shadow-color;
-		@media screen and (min-width: 600px) {
-			display: flex;
-			justify-content: space-between;
-			flex-wrap: wrap;
+		@include tablet-breakpoint {
+			@include flex-wrap-space-between;
 		}
 	}
 	&__title {
 		&-container {
-			@media screen and (min-width: 600px) {
+			@include tablet-breakpoint {
 				width: 100%;
 			}
 		}
@@ -601,7 +597,7 @@ nav {
 	}
 	&__subtitle {
 		font-weight: 300;
-		text-transform: uppercase;
+		text-transform: uppercase; /* Force les majuscules */
 		border-bottom: 3px solid $tertiary-color;
 		width: 3rem;
 		margin: 1rem 0;
@@ -615,7 +611,7 @@ nav {
 	overflow: hidden;
 	height: 4rem;
 	margin-bottom: 1rem;
-	@media screen and (min-width: 600px) {
+	@include tablet-breakpoint {
 		width: 100%;
 	}
 	&-container {
@@ -627,62 +623,58 @@ nav {
 		padding: 0.5rem;
 	}
 	&__title {
-		@include ellipsis;
 		font-size: 125%;
 		letter-spacing: -0.025rem;
+		@include ellipsis;
 	}
 	&__subtitle {
 		font-size: 85%;
-		@include ellipsis;
 		margin-top: 1rem;
+		@include ellipsis;
 	}
 	&__dish-price {
-		&-container {
-			display: flex;
-			margin-left: auto;
-		}
-		position: relative;
+		@include position-relative-0;
 		display: flex;
 		align-items: flex-end;
-		margin-left: auto;
 		font-size: 100%;
 		font-weight: bold;
-		z-index: 1;
 		margin-bottom: 1rem;
 		margin-right: 1rem;
+		transition-duration: 1s;
+		transform: translateX(4rem);
 	}
 	&__check {
-		display: none;
-		background-color: $tertiary-color;
-		position: relative;
-		-webkit-animation: menu-check-appear 1s;
-		animation: menu-check-appear 1s;
+		display: flex;
 		align-self: center;
-		right: 0;
+		background-color: $tertiary-color;
+		@include position-relative-0;
 		height: inherit;
 		border-radius: 0 1rem 1rem 0;
 		padding: 0 1.25rem;
+		transform: translateX(4rem);
+		transition: transform 1s;
 	}
 	&:hover {
-		.card-menu__check {
-			display: flex;
+		.card-menu {
+			&__check,
+			&__dish-price {
+				transform: translateX(0);
+			}
 		}
-		.card-menu__dish-price {
-			-webkit-animation: menu-check-appear 1s;
-			animation: menu-check-appear 1s;
+		.fa-check {
+			transform: rotate(360deg);
 		}
 	}
 }
 
 .fa-check {
-	-webkit-animation: menu-check-rotate 1s ease-in-out;
-	animation: menu-check-rotate 1s ease-in-out;
 	background-color: $card-background-color;
 	border-radius: 50%;
 	color: $tertiary-color;
-	display: flex;
 	align-self: center;
 	padding: 0.25rem;
+	transform: rotate(0deg);
+	transition: transform 1s;
 }
 
 .order-button {
@@ -710,7 +702,7 @@ nav {
 	&-container {
 		padding: 1.25rem 0;
 
-		@media screen and (min-width: 600px) {
+		@include tablet-breakpoint {
 			text-align: center;
 		}
 	}
@@ -719,13 +711,13 @@ nav {
 	}
 	ul {
 		margin-top: 1.25rem;
-		@media screen and (min-width: 600px) {
+		@include tablet-breakpoint {
 			display: flex;
 			justify-content: space-between;
 		}
 		li {
 			margin-bottom: 0.625rem;
-			@media screen and (min-width: 600px) {
+			@include tablet-breakpoint {
 				width: 25%;
 			}
 		}
