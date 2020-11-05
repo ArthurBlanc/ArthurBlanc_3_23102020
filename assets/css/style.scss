@@ -677,8 +677,9 @@ nav {
 			display: flex;
 			position: absolute;
 			top: 0;
-			right: -4rem;
-			transition: right 500ms 100ms ease-in-out;
+			right: 0;
+			transition: transform 500ms 100ms ease-in-out;
+			transform: translateX(4rem);
 		}
 		display: flex;
 		align-items: flex-end;
@@ -714,7 +715,7 @@ nav {
 				}
 			}
 			&__dish-price-check-container {
-				right: 0;
+				transform: translateX(0);
 			}
 		}
 		.fa-check {
