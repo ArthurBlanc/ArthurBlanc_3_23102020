@@ -310,8 +310,7 @@ a {
 
 @mixin heart-color {
 	background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur des coeurs */
-	background-clip: text; /* Applique la couleur du background au texte (les coeurs sont du texte) */
-	-webkit-background-clip: text;
+	-webkit-background-clip: text; /* Applique la couleur du background au texte (les coeurs sont du texte) */
 	color: transparent; /* Applique la couleur du background au texte (les coeurs sont du texte) */
 }
 

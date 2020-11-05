@@ -370,9 +370,8 @@ a {
   background: -o-linear-gradient(60deg, #ff79da, #9356dc);
   background: linear-gradient(30deg, #ff79da, #9356dc);
   /* Couleur des coeurs */
-  background-clip: text;
-  /* Applique la couleur du background au texte (les coeurs sont du texte) */
   -webkit-background-clip: text;
+  /* Applique la couleur du background au texte (les coeurs sont du texte) */
   color: transparent;
   /* Applique la couleur du background au texte (les coeurs sont du texte) */
   -webkit-text-stroke: 0;
@@ -395,9 +394,8 @@ a {
   background: -o-linear-gradient(60deg, #ff79da, #9356dc);
   background: linear-gradient(30deg, #ff79da, #9356dc);
   /* Couleur des coeurs */
-  background-clip: text;
-  /* Applique la couleur du background au texte (les coeurs sont du texte) */
   -webkit-background-clip: text;
+  /* Applique la couleur du background au texte (les coeurs sont du texte) */
   color: transparent;
   /* Applique la couleur du background au texte (les coeurs sont du texte) */
   -webkit-transform: scale(0);
