@@ -15,7 +15,7 @@
 /* == FOOTER  */
 
 /* ---------------------------------------- */
-/* ==       VARIABLES           */
+/* ==          VARIABLES             */
 /*---------------------------------------- */
 
 $primary-color: #9356dc;
@@ -82,12 +82,6 @@ $breakpoints: (
 	text-overflow: ellipsis;
 }
 
-@mixin position-relative-0 {
-	position: relative;
-	top: 0;
-	left: 0;
-}
-
 @mixin flex-wrap-space-between {
 	display: flex;
 	flex-wrap: wrap;
@@ -100,17 +94,18 @@ $breakpoints: (
 
 /* Animation du fond du loader => */
 @keyframes loader-container {
-	0%,
 	70% {
 		opacity: 1;
-		transform: scale(1);
 	}
-	99% {
+	99%,
+	100% {
 		opacity: 0;
+	}
+	70%,
+	99% {
 		transform: scale(1);
 	}
 	100% {
-		opacity: 0;
 		transform: scale(0); /* Pour que le loadeur disparaisse à la fin de l'animation */
 	}
 }
@@ -122,7 +117,7 @@ $breakpoints: (
 		transform: rotate(0deg);
 	}
 	to {
-		transform: rotate(360deg);
+		transform: rotate(1turn);
 	}
 }
 /* <= Animation de rotation du loader */
@@ -140,6 +135,19 @@ $breakpoints: (
 }
 /* <= Animation d'apparition des parties des menus */
 
+/* Animation de pulse sur les boutons => */
+@keyframes pulse {
+	0% {
+		box-shadow: 0 0 0 0 $secondary-color;
+	}
+	99% {
+		box-shadow: 0 0 0 1em adjust-color($secondary-color, $alpha: -1);
+	}
+	100% {
+		box-shadow: 0 0.5rem 1rem $box-shadow-color;
+	}
+}
+/* <= Animation de pulse sur le bouton */
 /* ---------------------------------------- */
 /* ==              FONT                 */
 /*---------------------------------------- */
@@ -225,10 +233,6 @@ h2 {
 
 a {
 	color: $dark-text-color;
-	&:visited,
-	&:hover {
-		color: $dark-text-color;
-	}
 }
 
 .main-container {
@@ -261,15 +265,19 @@ a {
 	background: linear-gradient(170deg, $secondary-color, $primary-color);
 	border: none;
 	font-size: 100%;
-	transition: opacity 500ms, transform 500ms, box-shadow 500ms;
 	@include primary-box-shadow;
 	padding: 1rem 2rem;
 	border-radius: 1.5rem;
 	cursor: pointer;
+	transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
 	&:hover {
+		animation: pulse 300ms ease-in-out;
 		opacity: 0.8;
-		transform: scale(1.05);
-		box-shadow: 0.5rem 0.5rem 0.5rem 0.125rem $box-shadow-color;
+		transform: translateY(-0.1rem);
+	}
+	&:active {
+		transform: translateY(0rem);
+		opacity: 1;
 	}
 }
 
@@ -296,7 +304,46 @@ a {
 		height: 100%;
 		background: adjust-color($tertiary-color, $alpha: -0.6);
 		animation: loader-container forwards 2s; /* La cible retiendra les valeurs calculées définies lors de la dernière étape */
-		z-index: 999;
+		z-index: 99;
+	}
+}
+
+@mixin heart-color {
+	background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur des coeurs */
+	background-clip: text; /* Applique la couleur du background au texte (les coeurs sont du texte) */
+	-webkit-background-clip: text;
+	color: transparent; /* Applique la couleur du background au texte (les coeurs sont du texte) */
+}
+
+.heart {
+	&-container {
+		position: relative;
+	}
+	position: absolute; /* Pour que les coeurs aient la meme position */
+	top: 0;
+	right: 0;
+	cursor: pointer;
+	z-index: 1; /* Pour que le coeur vide reste toujours en avant */
+	&--card {
+		-webkit-text-stroke: 0.05rem $card-background-color; /* Réduit l'épaiseur des contours du coeur vide */
+	}
+	&--menu {
+		-webkit-text-stroke: 0.05rem $secondary-background-color; /* Réduit l'épaiseur des contours du coeur vide */
+	}
+	&:hover {
+		@include heart-color;
+		-webkit-text-stroke: 0; /* Supprime le text-stroke au survol */
+		+ .heart-full {
+			transform: scale(1); /* Permet l'apparition du coeur plein */
+		}
+	}
+	&-full {
+		position: absolute; /* Pour que les coeurs aient la meme position */
+		top: 0;
+		right: 0;
+		@include heart-color;
+		transform: scale(0); /* Permet l'apparition du coeur plein */
+		transition: transform 300ms ease-in-out;
 	}
 }
 
@@ -304,9 +351,12 @@ a {
 /* ==            HEADER                */
 /*---------------------------------------- */
 .header {
-	@include position-relative-0;
+	position: sticky;
+	top: 0;
+	left: 0;
 	box-shadow: 0 0 0.25rem 0.125rem darken($box-shadow-color, 20%);
 	background: $primary-background-color;
+	z-index: 98;
 	&-container {
 		padding: 1rem 0 0.25rem 0;
 	}
@@ -327,12 +377,14 @@ nav {
 
 .back-arrow {
 	position: absolute;
-	color: $back-arrow-color;
-	transition: opacity 500ms;
-	font-size: 125%;
 	bottom: 1.25rem;
+	left: 1.25rem;
+	color: $back-arrow-color;
+	transition: opacity 300ms ease-in-out, transform 200ms ease-in-out;
+	font-size: 125%;
 	&:hover {
-		opacity: 0.8;
+		opacity: 0.6;
+		transform: scaleX(1.1);
 	}
 }
 
@@ -389,12 +441,11 @@ nav {
 	display: flex;
 	align-items: center;
 	background-color: $secondary-background-color;
-	transition: background-color 500ms, color 500ms;
-	@include position-relative-0;
 	@include primary-box-shadow;
-	border-radius: 1rem;
+	position: relative;
 	margin-bottom: 1.625rem;
 	margin-left: 0.5rem;
+	border-radius: 1rem;
 	padding: 1.875rem 0;
 	@include tablet-breakpoint {
 		width: 30%;
@@ -404,22 +455,39 @@ nav {
 		width: 32%;
 		padding: 1.875rem 0;
 	}
+
 	&:hover {
-		background-color: adjust-color($primary-color, $alpha: -0.8);
+		&::after {
+			opacity: 1;
+		}
 		.howto-card {
 			&__icon {
 				color: $primary-color; /* Change la couleur de l'icone au survol de la carte */
 			}
 		}
 	}
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		border-radius: 1rem;
+		background-color: adjust-color($primary-color, $alpha: -0.8);
+		opacity: 0;
+		transition: opacity 300ms ease-in-out;
+	}
 	&__number {
 		background-color: $primary-color;
 		border-radius: 50%;
 		color: $light-text-color;
 		font-size: 85%;
-		position: absolute;
 		padding: 0.375rem 0.625rem;
+		position: absolute;
 		left: -1rem;
+		bottom: 50%;
+		transform: translate(0, 50%);
 	}
 	&__icon {
 		color: $howto-card-icon-color;
@@ -427,6 +495,7 @@ nav {
 		text-align: center;
 		padding: 0 2rem;
 		width: 1.25rem;
+		transition: color 200ms 100ms ease-in-out;
 	}
 	&__text {
 		font-weight: bold;
@@ -450,8 +519,8 @@ nav {
 		}
 	}
 	background-color: $card-background-color;
-	transition: transform 500ms;
-	@include position-relative-0;
+	transition: transform 300ms ease-in-out;
+	position: relative;
 	@include primary-box-shadow;
 	cursor: pointer;
 	border-radius: 1rem;
@@ -470,7 +539,7 @@ nav {
 		text-decoration: none;
 	}
 	&:hover {
-		transform: scale(1.05);
+		transform: scale(1.048);
 	}
 	&__new {
 		position: absolute;
@@ -504,30 +573,6 @@ nav {
 		font-size: 175%;
 		margin-top: 0.125rem;
 		margin-right: 0.75rem;
-	}
-}
-
-.heart {
-	@include position-relative-0;
-	cursor: pointer;
-	-webkit-text-stroke: 0.05rem $light-text-color; /* Réduit l'épaiseur des contours du coeur avant */
-	&:hover {
-		background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur des contours au survol */
-		background-clip: text; /* Limite le background à l'intérieur du coeur avant*/
-		-webkit-text-fill-color: transparent; /* Pour que la couleur de fond du coeur avant soit transparante pour que le coeur arriere puisse apparaitre */
-		-webkit-text-stroke: 0; /* Supprime le text-stroke au survol */
-	}
-	&-color {
-		position: absolute; /* Pour que le coeur arriere ait la meme position que le coeur avant*/
-		top: 0;
-		right: 0;
-		background: linear-gradient(30deg, $secondary-color, $primary-color); /* Couleur du fond du coeur arriere */
-		background-clip: text; /* Limite le background à l'intérieur du coeur arriere */
-		transform: scale(0); /* Permet l'effet de remplissage du coeur */
-		transition: transform 0.3s;
-	}
-	&:hover .heart-color {
-		transform: scale(1); /* Permet l'effet de remplissage du coeur */
 	}
 }
 
@@ -574,7 +619,7 @@ nav {
 	background-color: $secondary-background-color;
 	&-container {
 		background-color: $secondary-background-color;
-		@include position-relative-0;
+		position: relative;
 		margin-top: -4rem; /* Monte le menu sur l'image */
 		padding: 2rem 0.75rem 4rem 1.25rem;
 		border-radius: 2rem 2rem 0 0;
@@ -606,8 +651,6 @@ nav {
 }
 
 .card-menu {
-	display: flex;
-	justify-content: space-between;
 	overflow: hidden;
 	height: 4rem;
 	margin-bottom: 1rem;
@@ -618,9 +661,9 @@ nav {
 		margin-bottom: 2.25rem;
 	}
 	&__dish-title-container {
-		overflow: hidden;
-		width: 100%;
 		padding: 0.5rem;
+		width: 80%;
+		transition: width 500ms 100ms ease-in-out;
 	}
 	&__title {
 		font-size: 125%;
@@ -628,53 +671,57 @@ nav {
 		@include ellipsis;
 	}
 	&__subtitle {
-		font-size: 85%;
-		margin-top: 1rem;
 		@include ellipsis;
 	}
 	&__dish-price {
-		@include position-relative-0;
+		&-check-container {
+			display: flex;
+			position: absolute;
+			top: 0;
+			right: -4rem;
+			transition: right 500ms 100ms ease-in-out;
+		}
 		display: flex;
 		align-items: flex-end;
 		font-size: 100%;
 		font-weight: bold;
 		margin-bottom: 1rem;
 		margin-right: 1rem;
-		transition-duration: 1s;
-		transform: translateX(4rem);
 	}
 	&__check {
-		display: flex;
-		align-self: center;
 		background-color: $tertiary-color;
-		@include position-relative-0;
-		height: inherit;
+		width: 4rem;
+		height: 4rem;
 		border-radius: 0 1rem 1rem 0;
-		padding: 0 1.25rem;
-		transform: translateX(4rem);
-		transition: transform 1s;
+		position: relative;
+		.fa-check {
+			background-color: $card-background-color;
+			border-radius: 50%;
+			color: $tertiary-color;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			padding: 0.25rem;
+			transform: translate(-50%, -50%) rotate(0deg);
+			transition: transform 600ms ease-in-out;
+		}
 	}
 	&:hover {
 		.card-menu {
-			&__check,
-			&__dish-price {
-				transform: translateX(0);
+			&__dish-title-container {
+				width: 65%;
+				@include desktop-breakpoint {
+					width: 70%;
+				}
+			}
+			&__dish-price-check-container {
+				right: 0;
 			}
 		}
 		.fa-check {
-			transform: rotate(360deg);
+			transform: translate(-50%, -50%) rotate(1turn);
 		}
 	}
-}
-
-.fa-check {
-	background-color: $card-background-color;
-	border-radius: 50%;
-	color: $tertiary-color;
-	align-self: center;
-	padding: 0.25rem;
-	transform: rotate(0deg);
-	transition: transform 1s;
 }
 
 .order-button {
@@ -695,8 +742,22 @@ nav {
 	a {
 		color: $light-text-color;
 		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
+		position: relative;
+		&:before {
+			content: "";
+			position: absolute;
+			width: 100%;
+			height: 0.1rem;
+			bottom: -0.1rem;
+			left: 0;
+			background-color: #fff;
+			visibility: hidden;
+			transform: scaleX(0);
+			transition: transform 300ms ease-in-out, visibility 300ms ease-in-out;
+		}
+		&:hover:before {
+			visibility: visible;
+			transform: scaleX(1);
 		}
 	}
 	&-container {
