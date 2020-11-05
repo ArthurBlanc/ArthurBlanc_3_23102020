@@ -889,15 +889,12 @@ nav ul {
   display: flex;
   position: absolute;
   top: 0;
-  right: 0;
+  right: -4rem;
   -webkit-transition: -webkit-transform 500ms 100ms ease-in-out;
   transition: -webkit-transform 500ms 100ms ease-in-out;
   -o-transition: transform 500ms 100ms ease-in-out;
   transition: transform 500ms 100ms ease-in-out;
   transition: transform 500ms 100ms ease-in-out, -webkit-transform 500ms 100ms ease-in-out;
-  -webkit-transform: translateX(4rem);
-      -ms-transform: translateX(4rem);
-          transform: translateX(4rem);
 }
 
 .card-menu__check {
@@ -937,9 +934,9 @@ nav ul {
 }
 
 .card-menu:hover .card-menu__dish-price-check-container {
-  -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-          transform: translateX(0);
+  -webkit-transform: translateX(-4rem);
+      -ms-transform: translateX(-4rem);
+          transform: translateX(-4rem);
 }
 
 .card-menu:hover .fa-check {
