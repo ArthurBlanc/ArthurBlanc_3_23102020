@@ -115,37 +115,6 @@
 }
 
 /* <= Animation d'apparition des parties des menus */
-/* Animation de pulse sur les boutons => */
-@-webkit-keyframes pulse {
-  0% {
-    -webkit-box-shadow: 0 0 0 0 #ff79da;
-            box-shadow: 0 0 0 0 #ff79da;
-  }
-  99% {
-    -webkit-box-shadow: 0 0 0 1em rgba(255, 121, 218, 0);
-            box-shadow: 0 0 0 1em rgba(255, 121, 218, 0);
-  }
-  100% {
-    -webkit-box-shadow: 0 0.5rem 1rem #ddd;
-            box-shadow: 0 0.5rem 1rem #ddd;
-  }
-}
-@keyframes pulse {
-  0% {
-    -webkit-box-shadow: 0 0 0 0 #ff79da;
-            box-shadow: 0 0 0 0 #ff79da;
-  }
-  99% {
-    -webkit-box-shadow: 0 0 0 1em rgba(255, 121, 218, 0);
-            box-shadow: 0 0 0 1em rgba(255, 121, 218, 0);
-  }
-  100% {
-    -webkit-box-shadow: 0 0.5rem 1rem #ddd;
-            box-shadow: 0 0.5rem 1rem #ddd;
-  }
-}
-
-/* <= Animation de pulse sur le bouton */
 /* ---------------------------------------- */
 /* ==              FONT                 */
 /*---------------------------------------- */
@@ -274,25 +243,25 @@ a {
   background: linear-gradient(170deg, #ff79da, #9356dc);
   border: none;
   font-size: 100%;
-  -webkit-box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
-          box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
+          box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
   padding: 1rem 2rem;
   border-radius: 1.5rem;
   cursor: pointer;
-  -webkit-transition: opacity 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
-  transition: opacity 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
-  -o-transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
-  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
-  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
+  -webkit-transition: opacity 300ms ease-in-out, -webkit-transform 300ms ease-in-out, -webkit-box-shadow 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out, -webkit-transform 300ms ease-in-out, -webkit-box-shadow 300ms ease-in-out;
+  -o-transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, box-shadow 300ms ease-in-out, -webkit-transform 300ms ease-in-out, -webkit-box-shadow 300ms ease-in-out;
 }
 
 .button:hover {
-  -webkit-animation: pulse 300ms ease-in-out;
-          animation: pulse 300ms ease-in-out;
   opacity: 0.8;
   -webkit-transform: translateY(-0.1rem);
       -ms-transform: translateY(-0.1rem);
           transform: translateY(-0.1rem);
+  -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0 #5e5e5e;
+          box-shadow: 0.1rem 0.1rem 0.5rem 0 #5e5e5e;
 }
 
 .button:active {
@@ -300,6 +269,7 @@ a {
       -ms-transform: translateY(0rem);
           transform: translateY(0rem);
   opacity: 1;
+  border: none;
 }
 
 .no-puce {
@@ -417,8 +387,8 @@ a {
   position: sticky;
   top: 0;
   left: 0;
-  -webkit-box-shadow: 0 0 0.25rem 0.125rem #aaaaaa;
-          box-shadow: 0 0 0.25rem 0.125rem #aaaaaa;
+  -webkit-box-shadow: 0 0 0.25rem 0.125rem #777777;
+          box-shadow: 0 0 0.25rem 0.125rem #777777;
   background: #fff;
   z-index: 98;
 }
@@ -514,8 +484,8 @@ nav ul {
       -ms-flex-align: center;
           align-items: center;
   background-color: #f6f6f6;
-  -webkit-box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
-          box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
+          box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
   position: relative;
   margin-bottom: 1.625rem;
   margin-left: 0.5rem;
@@ -622,8 +592,8 @@ nav ul {
   transition: transform 300ms ease-in-out;
   transition: transform 300ms ease-in-out, -webkit-transform 300ms ease-in-out;
   position: relative;
-  -webkit-box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
-          box-shadow: 0.25rem 0.25rem 0.5rem 0 #ddd;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
+          box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
   cursor: pointer;
   border-radius: 1rem;
   margin-bottom: 1.25rem;
@@ -785,8 +755,8 @@ nav ul {
   /* Monte le menu sur l'image */
   padding: 2rem 0.75rem 4rem 1.25rem;
   border-radius: 2rem 2rem 0 0;
-  -webkit-box-shadow: 0.8rem 0 0.8rem -1rem #ddd, -0.8rem 0 0.8rem -1rem #ddd;
-          box-shadow: 0.8rem 0 0.8rem -1rem #ddd, -0.8rem 0 0.8rem -1rem #ddd;
+  -webkit-box-shadow: 0.8rem 0 0.8rem -1rem #aaa, -0.8rem 0 0.8rem -1rem #aaa;
+          box-shadow: 0.8rem 0 0.8rem -1rem #aaa, -0.8rem 0 0.8rem -1rem #aaa;
 }
 
 @media screen and (min-width: 600px) {

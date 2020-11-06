@@ -35,7 +35,7 @@ $back-arrow-color: #2c2c2c;
 
 $howto-card-icon-color: #7e7e7e;
 
-$box-shadow-color: #ddd;
+$box-shadow-color: #aaa;
 
 $font-size: (
 	mobile: 4vw,
@@ -73,7 +73,7 @@ $breakpoints: (
 }
 
 @mixin primary-box-shadow($color: $box-shadow-color) {
-	box-shadow: 0.25rem 0.25rem 0.5rem 0 $color;
+	box-shadow: 0.1rem 0.1rem 0.5rem 0 $color;
 }
 
 @mixin ellipsis {
@@ -135,19 +135,6 @@ $breakpoints: (
 }
 /* <= Animation d'apparition des parties des menus */
 
-/* Animation de pulse sur les boutons => */
-@keyframes pulse {
-	0% {
-		box-shadow: 0 0 0 0 $secondary-color;
-	}
-	99% {
-		box-shadow: 0 0 0 1em adjust-color($secondary-color, $alpha: -1);
-	}
-	100% {
-		box-shadow: 0 0.5rem 1rem $box-shadow-color;
-	}
-}
-/* <= Animation de pulse sur le bouton */
 /* ---------------------------------------- */
 /* ==              FONT                 */
 /*---------------------------------------- */
@@ -269,15 +256,16 @@ a {
 	padding: 1rem 2rem;
 	border-radius: 1.5rem;
 	cursor: pointer;
-	transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+	transition: opacity 300ms ease-in-out, transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
 	&:hover {
-		animation: pulse 300ms ease-in-out;
 		opacity: 0.8;
 		transform: translateY(-0.1rem);
+		@include primary-box-shadow(darken($box-shadow-color, 30%));
 	}
 	&:active {
 		transform: translateY(0rem);
 		opacity: 1;
+		border: none;
 	}
 }
 
