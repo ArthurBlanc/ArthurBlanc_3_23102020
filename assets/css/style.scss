@@ -251,6 +251,7 @@ a {
 	color: $light-text-color;
 	background: linear-gradient(170deg, $secondary-color, $primary-color);
 	border: none;
+	outline: none;
 	font-size: 100%;
 	@include primary-box-shadow;
 	padding: 1rem 2rem;
@@ -265,10 +266,6 @@ a {
 	&:active {
 		transform: translateY(0rem);
 		opacity: 1;
-		border: none;
-	}
-	:focus {
-		border: none;
 	}
 }
 

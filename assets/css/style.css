@@ -242,6 +242,7 @@ a {
   background: -o-linear-gradient(280deg, #ff79da, #9356dc);
   background: linear-gradient(170deg, #ff79da, #9356dc);
   border: none;
+  outline: none;
   font-size: 100%;
   -webkit-box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
           box-shadow: 0.1rem 0.1rem 0.5rem 0 #aaa;
@@ -269,11 +270,6 @@ a {
       -ms-transform: translateY(0rem);
           transform: translateY(0rem);
   opacity: 1;
-  border: none;
-}
-
-.button :focus {
-  border: none;
 }
 
 .no-puce {
