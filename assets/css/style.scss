@@ -267,6 +267,9 @@ a {
 		opacity: 1;
 		border: none;
 	}
+	:focus {
+		border: none;
+	}
 }
 
 .no-puce {

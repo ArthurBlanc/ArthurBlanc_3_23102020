@@ -272,6 +272,10 @@ a {
   border: none;
 }
 
+.button :focus {
+  border: none;
+}
+
 .no-puce {
   list-style: none;
   padding-left: 0;
