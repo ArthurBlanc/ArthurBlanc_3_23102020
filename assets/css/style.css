@@ -393,6 +393,12 @@ a {
   z-index: 98;
 }
 
+@media screen and (min-width: 1200px) {
+  .header {
+    position: relative;
+  }
+}
+
 .header-container {
   padding: 1rem 0 0.25rem 0;
 }
@@ -667,12 +673,8 @@ nav ul {
   padding: 0.75rem;
 }
 
-.card__title {
-  margin-bottom: -0.75rem;
-}
-
 .card__district {
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .card__favorite {
@@ -802,7 +804,6 @@ nav ul {
 
 .card-menu {
   overflow: hidden;
-  height: 4rem;
   margin-bottom: 1rem;
 }
 
@@ -817,7 +818,7 @@ nav ul {
 }
 
 .card-menu__dish-title-container {
-  padding: 0.5rem;
+  padding: 0.5rem 0.5rem 0.75rem 0.5rem;
   width: 80%;
   -webkit-transition: width 500ms 100ms ease-in-out;
   -o-transition: width 500ms 100ms ease-in-out;
@@ -838,6 +839,7 @@ nav ul {
   white-space: nowrap;
   -o-text-overflow: ellipsis;
      text-overflow: ellipsis;
+  margin: 0;
 }
 
 .card-menu__dish-price {
@@ -860,6 +862,7 @@ nav ul {
   position: absolute;
   top: 0;
   right: -4rem;
+  height: 100%;
   -webkit-transition: -webkit-transform 500ms 100ms ease-in-out;
   transition: -webkit-transform 500ms 100ms ease-in-out;
   -o-transition: transform 500ms 100ms ease-in-out;
@@ -870,7 +873,6 @@ nav ul {
 .card-menu__check {
   background-color: #99e2d0;
   width: 4rem;
-  height: 4rem;
   border-radius: 0 1rem 1rem 0;
   position: relative;
 }
