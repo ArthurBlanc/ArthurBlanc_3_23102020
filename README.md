@@ -20,9 +20,9 @@ Dynamisez une page web avec des animations CSS :
 
 ### Situation (fictive) du projet :
 
-Développeur web junior chez une jeune startup qui voudrait s’imposer sur le marché de la restauration
+Développeur web junior chez une jeune startup qui souhaite se faire une place sur le marché de la restauration
 
-L’objectif du projet est de réaliser un site 100% mobile répertoriant les menus de restaurant gastronomiques, il sera possible à terme de réserver un restaurant ainsi que les plats à l’avance pour qu’il soit déjà prêt à l’arrivé du client au restaurant
+L’objectif du projet est de réaliser un site 100% mobile répertoriant les menus de restaurants gastronomiques, il sera possible à terme de réserver une table ainsi que les plats à l’avance pour qu’ils soient déjà prêts à l’arrivé du client au restaurant
 
 Mon rôle a été de réaliser le site en intégrant les maquettes mobiles en HTML et CSS et de rendre le site dynamique avec diverses animations en CSS
 
@@ -45,12 +45,12 @@ Mon rôle a été de réaliser le site en intégrant les maquettes mobiles en HT
 #### Fonctionnalités, effets graphiques et animations :
 
 - **Header :** Un bouton de retour à l’accueil qui ne doit apparaître que sur les pages de menu
-- **Boutons :** Au survol, la couleur de fond des boutons doit s’éclaircir et l’ombre portée devra également être plus visible
-- **Bouton “J’aime” :** En forme de coeur, il devra se remplir progressivement au survol (sur cette version)
-- **Footer :** Il doit être identique sur toutes les pages et au clic sur “Contact” un renvoi vers une adresse mail est effectué
-- **Page d’accueil :** Un “loading spinner” couvrant tout l’écran doit apparaître sur la page d’accueil pendant 1 à 3 secondes (uniquement en CSS, pas de librairie)
-- **Page de menu :** À l’arrivée sur la page, les plats devront apparaître progressivement avec un léger décalage dans le temps <br/>
-Une “coche” doit coulisser de la droite vers la gauche au survol (sur cette version) des plats. Si l’intitulé du plat est trop long, il devra être rogné avec des points de suspension
+- **Boutons :** Au survol, la couleur de fond doit s’éclaircir et l’ombre portée doit être plus visible
+- **Bouton “J’aime” :** En forme de coeur, il doit se remplir progressivement au survol
+- **Footer :** Au clic sur “Contact” un renvoi vers une adresse mail est effectué
+- **Page d’accueil :** Un “loading spinner” couvrant tout l’écran doit apparaître sur la page d’accueil pendant 1 à 3 secondes (uniquement en CSS)
+- **Page de menu :** Les plats doivent apparaître progressivement avec un décalage
+Une “coche” doit coulisser au survol des plats. Si l’intitulé du plat est trop long, il doit être rogné avec des points de suspension
 
 ## Notes sur la réalisation du projet et les choix techniques
 
