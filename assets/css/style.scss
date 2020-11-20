@@ -46,6 +46,7 @@ $font-size: (
 $breakpoints: (
 	tablet: 600px,
 	desktop: 1200px,
+	big-desktop: 2000px,
 );
 
 /* ---------------------------------------- */
@@ -58,6 +59,11 @@ $breakpoints: (
 }
 @mixin desktop-breakpoint {
 	@media screen and (min-width: map-get($breakpoints, desktop)) {
+		@content;
+	}
+}
+@mixin big-desktop-breakpoint {
+	@media screen and (min-width: map-get($breakpoints, big-desktop)) {
 		@content;
 	}
 }
@@ -173,6 +179,11 @@ h1 {
 /* ---------------------------------------- */
 /* ==            GENERAL                */
 /*---------------------------------------- */
+
+html {
+	background-color: $secondary-background-color;
+}
+
 body {
 	box-sizing: border-box; /* Indique au navigateur de prendre en compte la bordure et le remplissage dans la valeur définie pour la largeur et la hauteur */
 	@include no-margin;
@@ -726,6 +737,12 @@ nav {
 .footer {
 	background-color: $footer-background-color;
 	color: $light-text-color;
+	@include big-desktop-breakpoint {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+	}
 	a {
 		color: $light-text-color;
 		text-decoration: none;
