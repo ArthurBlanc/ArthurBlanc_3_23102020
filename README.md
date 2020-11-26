@@ -1,4 +1,4 @@
-# Dynamisez une page web avec des animations CSS
+# P3
 
 [![forthebadge](https://forthebadge.com/images/badges/validated-html5.svg)](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Farthurblanc.github.io%2FArthurBlanc_3_23102020%2F)
 [![forthebadge](https://forthebadge.com/images/badges/uses-css.svg)](https://forthebadge.com)
@@ -7,8 +7,6 @@
 Lien du projet : https://arthurblanc.github.io/ArthurBlanc_3_23102020/
 
 ## Description :
-
-Dynamisez une page web avec des animations CSS :
 
 > Implémentez la version mobile d'un site de foodtech avec des animations CSS.
 >
