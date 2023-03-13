@@ -163,7 +163,7 @@ That's it!
 Home:
 
 <p align="center">
-  <img src="/assets/img/mockup/home.png" alt="Home Mockup">
+  <img src="/assets/img/mockup/accueil.png" alt="Home Mockup">
 </p>
 
 Menu page:
