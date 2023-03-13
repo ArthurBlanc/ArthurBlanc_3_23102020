@@ -1,3 +1,5 @@
+![ohmyfood](/assets/img/logo/ohmyfood.png)
+
 # ohmyfood 📱🍴
 
 [![forthebadge](https://forthebadge.com/images/badges/validated-html5.svg)](https://validator.w3.org/nu/?showsource=yes&showoutline=yes&showimagereport=yes&doc=https%3A%2F%2Farthurblanc.github.io%2Fohmyfood%2F)
